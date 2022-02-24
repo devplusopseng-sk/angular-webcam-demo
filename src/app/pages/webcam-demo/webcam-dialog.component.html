@@ -1,0 +1,90 @@
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card card-default card-w-md">
+            <div class="card-header">
+                <h3 class="card-title m-0"> Capture Image </h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <webcam [height]="350" [width]="500" [trigger]="triggerObservable" *ngIf="showWebcam"
+                            (imageCapture)="handleImage($event)" [allowCameraSwitch]="allowCameraSwitch"
+                            [switchCamera]="nextWebcamObservable" [videoOptions]="videoOptions"
+                            (cameraSwitched)="cameraWasSwitched($event)" (initError)="handleInitError($event)"></webcam>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-12 mt-2 mb-2 mt-md-0 mb-md-0">
+                        <button type="button" class="btn btn-primary p-1 mr-2 clh-0" (click)="triggerSnapshot();">
+                            <span class="icon-asset material-icons">
+                                photo_camera
+                            </span>
+                        </button>
+                        <span class="icon-name mat-caption">Take Picture</span>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-12 mt-2 mb-2 mt-md-0 mb-md-0">
+                        <button type="button" class="btn btn-primary p-1 mr-2 clh-0" (click)="showNextWebcam(true);">
+                            <span class="icon-asset material-icons">
+                                cameraswitch
+                            </span>
+                        </button>
+                        <span class="icon-name mat-caption">Switch Camera</span>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-footer -->
+        </div>
+        <!-- /.card -->
+    </div>
+    <div class="col-lg-6">
+        <div class="card card-default card-w-md">
+            <div class="card-header">
+                <h3 class="card-title m-0"> Image Preview </h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-12 text-center mb-1" *ngIf="webcamImage">
+                        <img [height]="350" [width]="500" [src]="webcamImage.imageAsDataUrl" />
+                    </div>
+                    <div class="col-lg-12 text-center mb-1 pl-5 pr-5" *ngIf="!webcamImage">
+                        <div class="box has-advanced-upload">
+                            <span class="icon-asset material-icons mat-icon-md">
+                                preview
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer">
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-12 mt-2 mb-2 mt-md-0 mb-md-0">
+                        <button type="button" class="btn btn-primary p-1 mr-2 clh-0" [mat-dialog-close]="true"
+                            (click)="onConfirm()">
+                            <span class="icon-asset material-icons">
+                                thumb_up_alt
+                            </span>
+                        </button>
+                        <span class="icon-name mat-caption">Confirm</span>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-12 mt-2 mb-2 mt-md-0 mb-md-0">
+                        <button type="button" class="btn btn-primary p-1 mr-2 clh-0" [mat-dialog-close]="true"
+                            (click)="onDismiss()">
+                            <span class="icon-asset material-icons">
+                                cancel
+                            </span>
+                        </button>
+                        <span class="icon-name mat-caption">Cancel</span>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-footer -->
+        </div>
+        <!-- /.card -->
+    </div>
+</div>
