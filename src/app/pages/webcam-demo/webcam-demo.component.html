@@ -1,37 +1,41 @@
 <div class="card card-default">
-    <div class="card-header">
-      <h3 class="card-title m-0"> Image Upload </h3>
-    </div>
-    <!-- /.card-header -->
-    <div class="card-body">
-      <div class="row">
-        <div class="col-lg-10 col-md-4 col-12">
-            <button type="button" class="btn btn-primary" (click)="openWebCamDialog()"> Webcam
-              </button>
-        </div>
-      </div>
-    </div>
-    <!-- /.card-body -->
-    <div class="card-footer">
-      <div class="row">
-        <div class="col-lg-6 col-md-6 col-12 mt-2 mb-2 mt-md-0 mb-md-0">
-          <button type="button" class="btn btn-primary p-1 mr-2 clh-0">
-            <span class="icon-asset material-icons">
-              aspect_ratio
-            </span>
-          </button>
-          <span class="icon-name mat-caption">Preview Image</span>
-        </div>
-        <div class="col-lg-6 col-md-6 col-12 mt-2 mb-2 mt-md-0 mb-md-0">
-          <button type="button" class="btn btn-primary p-1 mr-2 clh-0">
-            <span class="icon-asset material-icons">
-              delete
-            </span>
-          </button>
-          <span class="icon-name mat-caption">Delete Image</span>
-        </div>
-      </div>
-    </div>
-    <!-- /.card-footer -->
+  <div class="card-header">
+    <h3 class="card-title m-0"> Image Upload </h3>
   </div>
-  <!-- /.card -->
+  <!-- /.card-header -->
+  <div class="card-body">
+    <div class="row">
+      <div class="col-lg-10 col-md-4 col-12" *ngIf="imgDtls.id ===''">
+        <button type="button" class="btn btn-primary" (click)="openWebCamDialog()"> Webcam
+        </button>
+      </div>
+      <div>
+        <h3 *ngIf="imgDtls.id !==''"><i class="far fa-laugh-beam"></i> Successfully captured the image. You can preview or delete the image using following action buttons.</h3>
+      </div>
+    </div>
+
+  </div>
+  <!-- /.card-body -->
+  <div class="card-footer" *ngIf="imgDtls.id !==''">
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-12 mt-2 mb-2 mt-md-0 mb-md-0">
+        <button type="button" class="btn btn-primary p-1 mr-2 clh-0" (click)="previewImg(imgDtls.id);">
+          <span class="icon-asset material-icons">
+            aspect_ratio
+          </span>
+        </button>
+        <span class="icon-name mat-caption">Preview Image</span>
+      </div>
+      <div class="col-lg-6 col-md-6 col-12 mt-2 mb-2 mt-md-0 mb-md-0">
+        <button type="button" class="btn btn-primary p-1 mr-2 clh-0" (click)="deleteImg(imgDtls.id);">
+          <span class="icon-asset material-icons">
+            delete
+          </span>
+        </button>
+        <span class="icon-name mat-caption">Delete Image</span>
+      </div>
+    </div>
+  </div>
+  <!-- /.card-footer -->
+</div>
+<!-- /.card -->

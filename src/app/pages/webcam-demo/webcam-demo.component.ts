@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { WebcamImage, WebcamInitError, WebcamUtil } from 'ngx-webcam';
 import { Observable, Subject } from 'rxjs';
+import { v4 as uuidv4 } from 'uuid';
+import { ImgDtls } from 'src/app/model/ImgDtls';
 
 @Component({
   selector: 'app-webcam-demo',
@@ -10,11 +12,15 @@ import { Observable, Subject } from 'rxjs';
 })
 export class WebcamDemoComponent implements OnInit {
 
+  imgDtls: ImgDtls = new ImgDtls();
+  images: any = {};
+
   constructor(
     public dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
+    console.log(uuidv4());
   }
 
   openWebCamDialog(): void {
@@ -29,8 +35,25 @@ export class WebcamDemoComponent implements OnInit {
     dialogRef.afterClosed().subscribe((result: any) => {
       if (result.confirmed) {
         console.log(result);
+        var uuid = uuidv4();
+        this.imgDtls.id = uuid;
+        this.imgDtls.imgBase64 = result.imgData;
+        this.images[uuid] = result.imgData;
       }
     });
+  }
+
+  previewImg(id: any): void {
+    console.log('Inside previewImg');
+    const windowOpen = window.open();
+    windowOpen?.document.write('<img src="' + this.images[id] + '" style="height:100%;">');
+    windowOpen?.stop();
+  }
+
+  deleteImg(id: any): void {
+    console.log('Inside deleteImg');
+    this.imgDtls.id = '';
+    delete this.images[id];
   }
 
 }
